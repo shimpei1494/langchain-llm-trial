@@ -1,4 +1,11 @@
+import os
+from dotenv import load_dotenv
 import streamlit as st
+from langchain_google_genai import ChatGoogleGenerativeAI
+
+load_dotenv()
+# モデルはGemini Proを使用
+llm = ChatGoogleGenerativeAI(model='gemini-pro')
 
 st.title("langchain-streamlit-app")
 
@@ -17,7 +24,7 @@ if prompt:
     with st.chat_message("user"):
         st.markdown(prompt)
     with st.chat_message("assistant"):
-        response = "こんにちは"
-        st.markdown(response)
-    
+        response = llm.invoke(prompt)
+        st.markdown(response.content)
+
     st.session_state.messages.append({"role": "assistant", "content": response})
