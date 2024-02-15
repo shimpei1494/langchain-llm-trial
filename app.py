@@ -27,4 +27,4 @@ if prompt:
         response = llm.invoke(prompt)
         st.markdown(response.content)
 
-    st.session_state.messages.append({"role": "assistant", "content": response})
+    st.session_state.messages.append({"role": "assistant", "content": response.content})
